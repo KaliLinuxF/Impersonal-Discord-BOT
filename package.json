@@ -1,0 +1,27 @@
+{
+  "name": "impersonal-discord-bot",
+  "version": "0.0.1",
+  "description": "the discord bot for impersonal team channel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaliLinuxF/Impersonal-Discord-BOT.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "impersonal"
+  ],
+  "author": "vk.com/roflonton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaliLinuxF/Impersonal-Discord-BOT/issues"
+  },
+  "homepage": "https://github.com/KaliLinuxF/Impersonal-Discord-BOT#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  }
+}
