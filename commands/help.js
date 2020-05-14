@@ -9,13 +9,13 @@ module.exports = {
     execute(message, args) {
 
         const data = [];
-        const { commands } = message.client;
-        
+		const { commands } = message.client;
+		
 
         if (!args.length) {
             data.push(commands.map(command => command.name).join(', '));
 
-            const embedHelp = new Discord.RichEmbed()
+            const embedHelp = new Discord.MessageEmbed()
                 .setColor('#000000')
                 .setTitle('Список команд бота:')
                 .setDescription(`${data}\n\nДля подробного описания команды используйте: \`${prefix}help [Команда]\``)
@@ -42,7 +42,7 @@ module.exports = {
             cooldownCommand = command.cooldown;
         }
        
-        const embedHelpCommand = new Discord.RichEmbed()
+        const embedHelpCommand = new Discord.MessageEmbed()
             .setColor('#7908AA')
             .setTitle(`Помощь по команде \`${command.name}\``)
             .addField('Описание команды:', `\`${command.description}\``)
