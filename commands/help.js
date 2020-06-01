@@ -15,12 +15,12 @@ module.exports = {
         if (!args.length) {
             data.push(commands.map(command => command.name).join(', '));
 
-            const embedHelp = new Discord.MessageEmbed()
+            const embed = new Discord.MessageEmbed()
                 .setColor('#000000')
                 .setTitle('Список команд бота:')
                 .setDescription(`${data}\n\nДля подробного описания команды используйте: \`${prefix}help [Команда]\``)
 
-            message.channel.send(embedHelp);
+            message.channel.send(embed);
             return;
         }
 

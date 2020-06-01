@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 const Client = require('./client/Client');
 const { prefix,token } = require('./config.json');
 
-
 const cooldowns = new Discord.Collection();
 const client = new Client();
 client.commands = new Discord.Collection();
@@ -80,5 +79,6 @@ client.on('message', message => {
 		message.reply('Что-то пошло не так, обратитесь к всемогущему разработчику!');
 	}
 });
+
 
 client.login(token);

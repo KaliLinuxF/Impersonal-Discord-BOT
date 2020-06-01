@@ -1,39 +1,32 @@
 const { messageChanelId } = require('../config.json');
-const { impersonalRoleId } = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = {
     name: 'msg',
     description: 'Сообщение для Impersonal Hope Team',
-	usage: '[имя команды]',
-	args: 1,
+	usage: '[Роль], [Сообщение]',
+	args: 2,
 	cooldown: 5,
 	onlyAdmin: true,
     execute(message, args) {
 		
 	   let msgChannel = message.guild.channels.cache.get(messageChanelId);
-	   let impersonalPlayers = message.guild.roles.cache.get(impersonalRoleId).members.map(m=>m.user.id);
 
-	   if(!msgChannel || !impersonalPlayers) {
-			return message.reply('Канал для сообщений, либо роль Impersonal не настроены, обратитесь к разработчику..');
+	   if(!msgChannel) {
+			return message.reply('Канал для сообщений не настроен, обратитесь к разработчику..');
 	   }
 
-	   let mentions = "";
+	   const role = args[0];
+	   args.shift();
+	   let msg = args.join(' ');
 
-	   for (let i = 0; i < impersonalPlayers.length; i++) {
-		  
-		mentions += `<@${impersonalPlayers[i]}> `
-		   
-	   }
-
-        const embedHelpCommand = new Discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed()
 			   .setAuthor(message.author.username, message.author.avatarURL())
-			   .setDescription(args.join(' '))
+			   .setDescription(msg)
 			   .setColor('#7908AA')
-			   .setTitle('Обращение к команде Impersonal');
+			   .setTitle(`Обращение к участникам Discord канала`);
 
-		msgChannel.send(mentions, embedHelpCommand);
-		
+		msgChannel.send(`${role}`, embed);
 		message.delete();
     },
 };
