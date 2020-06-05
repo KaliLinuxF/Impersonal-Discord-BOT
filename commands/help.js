@@ -1,5 +1,6 @@
 const { prefix } = require('../config.json');
 const Discord = require('discord.js');
+const commands = require('../index');
 
 module.exports = {
     name: 'help',
@@ -9,9 +10,7 @@ module.exports = {
     execute(message, args) {
 
         const data = [];
-		const { commands } = message.client;
 		
-
         if (!args.length) {
             data.push(commands.map(command => command.name).join(', '));
 
@@ -47,7 +46,7 @@ module.exports = {
             .setTitle(`Помощь по команде \`${command.name}\``)
             .addField('Описание команды:', `\`${command.description}\``)
             .addField(`Использование:`, `\`${prefix}${command.name} ${usageCommand}\``)
-            .addField('Перезарядка', `\`${cooldownCommand}\``);
+            .addField('Перезарядка', `\`${cooldownCommand}\` seconds`);
 
         message.channel.send(embedHelpCommand);
     },

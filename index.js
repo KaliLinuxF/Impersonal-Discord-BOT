@@ -1,20 +1,23 @@
 const fs = require('fs')
 const Discord = require('discord.js');
-const Client = require('./client/Client');
+const { Collection, Client } = require('discord.js');
 const { prefix,token } = require('./config.json');
+require('./dontSleep.js');
 
-const cooldowns = new Discord.Collection();
+const cooldowns = new Collection();
 const client = new Client();
-client.commands = new Discord.Collection();
+commands = new Collection();
+
+module.exports = commands;
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+	commands.set(command.name, command);
 }
 
-console.log(client.commands);
+console.log(commands);
 
 client.once('ready', () => {
 	console.log('Ready!');
@@ -28,9 +31,9 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-	if (!client.commands.has(commandName)) return;
+	if (!commands.has(commandName)) return;
 	
-	const command = client.commands.get(commandName);
+	const command = commands.get(commandName);
 
 
 	if (command.guildOnly && message.channel.type !== 'text') {
